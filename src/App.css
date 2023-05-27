@@ -1,0 +1,22 @@
+.app-wrapper {
+  margin: 0 auto;
+  display: grid;
+  width: 1200px;
+  grid-template-areas: 
+  "h h"
+  "n c";
+
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+  grid-gap: 10px;
+}
+
+.app-wrapper-content{
+    display: flex;
+    flex-direction: column;
+    color:#fff;
+    grid-area: c;
+    background-image: url('https://html-templates.info/wp-content/uploads/140520040122.jpg');
+    padding:10px 20px 10px 20px ;
+}
+
