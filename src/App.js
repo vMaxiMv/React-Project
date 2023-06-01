@@ -3,19 +3,42 @@
 import "./App.css";
 import Header from "./components/Header/Header";
 import Messanger from "./components/Messanger/Messanger";
+import Music from "./components/Music/Music";
 import Nav from "./components/Nav/Nav";
+import News from "./components/News/News";
 import Profile from "./components/Profile/Profile";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Settings from "./components/Settings/Settings";
 
-function App() {
+function App(props) {
   return (
-    <div className="app-wrapper">
-      <Header />
-      <Nav />
-      <div className="app-wrapper-content">
-        <Messanger />
-        {/* <Profile /> */}
+    <BrowserRouter>
+      <div className="app-wrapper">
+        <Header />
+        <Nav />
+        <div className="app-wrapper-content">
+          <Routes>
+            {/* element - это компонент, который отвечает за обработку запроса по написанному маршруту(пишем в скобках компоненту как в jsx) */}
+            <Route
+              path="/Profile"
+              element={<Profile MyPostArray={props.MyPostArray} />}
+            />
+            <Route
+              path="/Messanger/*"
+              element={
+                <Messanger
+                  MessangerItemArray={props.MessangerItemArray}
+                  MessangerTextArray={props.MessangerTextArray}
+                />
+              }
+            />
+            <Route path="/News" element={<News />} />
+            <Route path="/Music" element={<Music />} />
+            <Route path="/Settings" element={<Settings />} />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 

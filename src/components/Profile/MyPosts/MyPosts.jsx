@@ -1,7 +1,11 @@
 import myPosts from './MyPosts.module.css';
 import Post from './Post/Post';
 
-const MyPosts = () => {
+
+
+
+const MyPosts = (props) => {
+    const NewMyPostArray = props.MyPostArray.map(item => <Post message={item.message} likes={item.likes} />)
     return (
         <div>My posts
             <div>
@@ -9,8 +13,7 @@ const MyPosts = () => {
                 <button>Add</button>
             </div>
             <div className={myPosts.posts}>
-                <Post message='Hello' likes='5' />
-                <Post message='Bye' likes='15' />
+                {NewMyPostArray}
             </div>
         </div>
     )
