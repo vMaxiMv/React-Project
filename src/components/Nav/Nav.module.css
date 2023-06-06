@@ -1,13 +1,33 @@
 .nav{
     grid-area: n;
     background-color: rgb(148, 148, 254);
-    padding:10px 40px 10px 10px
+    padding:10px 40px 10px 30px;
+    border-radius: 15px;
   }
-.item a{
-    color:white;
+  .nav a{
     text-decoration: none;
+    color: #fff;
+
+  }
+.item{
+  margin-bottom: 10px;
+  cursor: pointer;
 }
-.item a.active{
-  color:black
+
+.item img{
+  width: 20px;
+  padding-right: 5px;
+  vertical-align: top;
 }
+.item:hover{
+  background-color: rgb(196, 196, 255);
+  border-radius: 5px;
+  
+}
+.nav a.active{
+  color:rgb(0, 0, 0);
+  font-weight: 500;
+  border-radius: 5px;
+}
+
 

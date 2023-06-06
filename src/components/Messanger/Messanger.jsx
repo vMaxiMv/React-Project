@@ -2,12 +2,11 @@ import messangerStyle from './Messanger.module.css';
 import { NavLink } from "react-router-dom"
 import MessangerItem from './MessangerItem/MessangerItem';
 import MessangerText from './MessangerText/MessangerText';
-{/* <div>
+
+<div>
     <MessangerItem />
     <MessangerText />
-</div> */}
-
-
+</div>
 
 
 const Messanger = (props) => {

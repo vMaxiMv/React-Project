@@ -1,4 +1,5 @@
 .app-wrapper {
+  
   margin: 0 auto;
   display: grid;
   width: 1200px;
@@ -18,5 +19,6 @@
     grid-area: c;
     background-image: url('https://html-templates.info/wp-content/uploads/140520040122.jpg');
     padding:10px 20px 10px 20px ;
+    border-radius: 15px;
 }
 

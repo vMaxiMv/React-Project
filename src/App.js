@@ -21,14 +21,23 @@ function App(props) {
             {/* element - это компонент, который отвечает за обработку запроса по написанному маршруту(пишем в скобках компоненту как в jsx) */}
             <Route
               path="/Profile"
-              element={<Profile MyPostArray={props.MyPostArray} />}
+              element={
+                <Profile
+                  MyPostArray={props.state.ProfilePage.MyPostArray}
+                  appPostFunc={props.appPostFunc}
+                />
+              }
             />
             <Route
               path="/Messanger/*"
               element={
                 <Messanger
-                  MessangerItemArray={props.MessangerItemArray}
-                  MessangerTextArray={props.MessangerTextArray}
+                  MessangerItemArray={
+                    props.state.MessangerPage.MessangerItemArray
+                  }
+                  MessangerTextArray={
+                    props.state.MessangerPage.MessangerTextArray
+                  }
                 />
               }
             />
