@@ -3,13 +3,17 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 //import reportWebVitals from "./reportWebVitals";
-import { appPostFunc } from "./redux/state";
+import { appPostFunc, updateNewPostText } from "./redux/state";
 
+const root = ReactDOM.createRoot(document.getElementById("root"));
 export const rerenderTree = (state) => {
-  const root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(
     <React.StrictMode>
-      <App state={state} appPostFunc={appPostFunc} />
+      <App
+        state={state}
+        appPostFunc={appPostFunc}
+        updateNewPostText={updateNewPostText}
+      />
     </React.StrictMode>
   );
 };

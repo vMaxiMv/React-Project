@@ -8,15 +8,21 @@ const addPostReact = React.createRef()
 const MyPosts = (props) => {
 
     const addPost = () => {
-        const text = addPostReact.current.value;
-        props.appPostFunc(text)
+        //const text = addPostReact.current.value;
+        props.appPostFunc()
+        //props.updateNewPostText('')
     }
 
-    const NewMyPostArray = props.MyPostArray.map(item => <Post message={item.message} likes={item.likes} />)
+    const onPostChange = () => {
+        const text = addPostReact.current.value;
+        props.updateNewPostText(text)
+    }
+
+    const NewMyPostArray = props.posts.map(item => <Post message={item.message} likes={item.likes} />)
     return (
         <div>My posts
             <div>
-                <textarea ref={addPostReact}></textarea>
+                <textarea ref={addPostReact} value={props.newPostText} onChange={onPostChange} />
                 <button onClick={addPost}>Add</button>
             </div>
             <div className={myPosts.posts}>

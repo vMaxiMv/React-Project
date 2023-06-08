@@ -14,20 +14,27 @@ const state = {
     ],
   },
   ProfilePage: {
-    MyPostArray: [
+    Posts: [
       { id: 1, message: "Hello, guys", likes: "30" },
       { id: 2, message: "Bye", likes: "12" },
     ],
+    newPostText: "Maxxx",
   },
 };
 //debugger;
-export const appPostFunc = (postMessage) => {
+export const appPostFunc = () => {
   let newPost = {
     id: 3,
-    message: postMessage,
+    message: state.ProfilePage.newPostText,
     likes: 0,
   };
-  state.ProfilePage.MyPostArray.push(newPost);
+  state.ProfilePage.Posts.push(newPost);
+  state.ProfilePage.newPostText = "";
+  rerenderTree(state);
+};
+
+export const updateNewPostText = (Newtext) => {
+  state.ProfilePage.newPostText = Newtext;
   rerenderTree(state);
 };
 

@@ -23,8 +23,9 @@ function App(props) {
               path="/Profile"
               element={
                 <Profile
-                  MyPostArray={props.state.ProfilePage.MyPostArray}
+                  ProfilePage={props.state.ProfilePage}
                   appPostFunc={props.appPostFunc}
+                  updateNewPostText={props.updateNewPostText}
                 />
               }
             />
