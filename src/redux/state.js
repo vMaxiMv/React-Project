@@ -25,6 +25,20 @@ let store = {
     return this._state;
   },
 
+  // appPostFunc() {
+  //   let newPost = {
+  //     id: 3,
+  //     message: this._state.ProfilePage.newPostText,
+  //     likes: 0,
+  //   };
+  //   this._state.ProfilePage.Posts.push(newPost);
+  //   this._state.ProfilePage.newPostText = "";
+  //   this._rerenderTree(this._state);
+  // },
+  // updateNewPostText(Newtext) {
+  //   this._state.ProfilePage.newPostText = Newtext;
+  //   this._rerenderTree(this._state);
+  // },
   wonder(observer) {
     this._rerenderTree = observer;
   },
