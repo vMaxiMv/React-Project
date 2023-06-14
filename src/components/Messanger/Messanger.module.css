@@ -1,21 +1,18 @@
 .messanger{
 display: grid;
-
 grid-template-columns: 2fr 10fr;
 }
 
 .messanger_items{
 padding: 10px;
 }
-
-.dialog{
-
+.messanger_items div a{
+    text-decoration: none;
+    color:#fff;
 }
+
 
 .messages{
 padding:10px;
 }
 
-.message{
-    
-}

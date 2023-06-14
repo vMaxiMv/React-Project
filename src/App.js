@@ -32,12 +32,14 @@ function App(props) {
               path="/Messanger/*"
               element={
                 <Messanger
-                  MessangerItemArray={
-                    props.state.MessangerPage.MessangerItemArray
-                  }
-                  MessangerTextArray={
-                    props.state.MessangerPage.MessangerTextArray
-                  }
+                  // MessangerItemArray={
+                  //   props.state.MessangerPage.MessangerItemArray
+                  // }
+                  // MessangerTextArray={
+                  //   props.state.MessangerPage.MessangerTextArray
+                  // }
+                  MessangerPage={props.state.MessangerPage}
+                  dispatch={props.dispatch}
                 />
               }
             />
