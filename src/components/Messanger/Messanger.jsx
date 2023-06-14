@@ -3,7 +3,8 @@ import messangerStyle from './Messanger.module.css';
 import { NavLink } from "react-router-dom"
 import MessangerItem from './MessangerItem/MessangerItem';
 import MessangerText from './MessangerText/MessangerText';
-import { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/state';
+import { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/MessangerPageReducer';
+
 
 <div>
     <MessangerItem />
