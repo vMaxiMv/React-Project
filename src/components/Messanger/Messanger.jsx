@@ -15,15 +15,15 @@ const addMessageReact = React.createRef()
 
 const Messanger = (props) => {
     const onSendMessageClick = () => {
-        props.dispatch(sendMessageCreator())
+        props.onSendMessageClickCallBack()
     }
     const onNewMessageChange = () => {
         const text = addMessageReact.current.value;
-        props.dispatch(updateNewMessageBodyCreator(text))
+        props.onNewMessageChangeCallBack(text)
     }
 
-    const NewMessangerItemArray = props.MessangerPage.MessangerItemArray.map(item => <MessangerItem name={item.name} id={item.id} />) // Просто пробегаемся по массиву объектов, обращаясь каждому элкменту массива через map и отображая его в jsx размете
-    const NewMessangerTextArray = props.MessangerPage.MessangerTextArray.map(item => <MessangerText className={messangerStyle.text} text={item.text} />)
+    const NewMessangerItemArray = props.MessangerPageItem.map(item => <MessangerItem name={item.name} id={item.id} />) // Просто пробегаемся по массиву объектов, обращаясь каждому элкменту массива через map и отображая его в jsx размете
+    const NewMessangerTextArray = props.MessangerPageText.map(item => <MessangerText className={messangerStyle.text} text={item.text} />)
     return (
         <div className={messangerStyle.messanger}>
             <div className={messangerStyle.messanger_items}>
@@ -33,7 +33,7 @@ const Messanger = (props) => {
             </div>
             <div className={messangerStyle.messages}>
                 <div>{NewMessangerTextArray}</div>
-                <div><textarea ref={addMessageReact} placeholder='Введите сообщение' value={props.MessangerPage.newMessageBody} onChange={onNewMessageChange}></textarea></div>
+                <div><textarea ref={addMessageReact} placeholder='Введите сообщение' value={props.newMessageBody} onChange={onNewMessageChange}></textarea></div>
                 <div><button onClick={onSendMessageClick}>Send</button></div>
             </div>
         </div>

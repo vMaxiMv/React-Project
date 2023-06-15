@@ -2,13 +2,13 @@
 //import { useState } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
-import Messanger from "./components/Messanger/Messanger";
 import Music from "./components/Music/Music";
 import Nav from "./components/Nav/Nav";
 import News from "./components/News/News";
 import Profile from "./components/Profile/Profile";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Settings from "./components/Settings/Settings";
+import MessangerContainer from "./components/Messanger/MessangerContainer";
 
 function App(props) {
   return (
@@ -19,27 +19,18 @@ function App(props) {
         <div className="app-wrapper-content">
           <Routes>
             {/* element - это компонент, который отвечает за обработку запроса по написанному маршруту(пишем в скобках компоненту как в jsx) */}
-            <Route
-              path="/Profile"
-              element={
-                <Profile
-                  ProfilePage={props.state.ProfilePage}
-                  dispatch={props.dispatch}
-                />
-              }
-            />
+            <Route path="/Profile" element={<Profile store={props.store} />} />
             <Route
               path="/Messanger/*"
               element={
-                <Messanger
+                <MessangerContainer
                   // MessangerItemArray={
                   //   props.state.MessangerPage.MessangerItemArray
                   // }
                   // MessangerTextArray={
                   //   props.state.MessangerPage.MessangerTextArray
                   // }
-                  MessangerPage={props.state.MessangerPage}
-                  dispatch={props.dispatch}
+                  store={props.store}
                 />
               }
             />
