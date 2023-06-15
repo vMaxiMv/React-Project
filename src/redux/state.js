@@ -30,7 +30,7 @@ let store = {
     return this._state;
   },
 
-  wonder(observer) {
+  subscribe(observer) {
     this._rerenderTree = observer;
   },
   dispatch(action) {
