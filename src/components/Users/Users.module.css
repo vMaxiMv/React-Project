@@ -1,0 +1,15 @@
+.ImageSize{
+    width: 50px;
+    height: 50px;
+}
+.nums span{
+    margin-right:15px ;
+    cursor: pointer;
+}
+.nums button:first-child{
+    margin-right: 15px;
+}
+.current{
+    font-weight: bold;
+    color:rgb(148, 148, 254);
+}

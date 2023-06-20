@@ -17,15 +17,22 @@ let initialState = {
 };
 
 const MessangerPageReducer = (state = initialState, action) => {
+  let stateCopy; // Можно избавиться от данной переменной и сразу возвращать объект, но боюсь я потом не пойму что тут написано
   switch (action.type) {
     case UpdateNewMessageBody:
-      state.newMessageBody = action.body;
-      return state;
+      stateCopy = { ...state, newMessageBody: action.body };
+      return stateCopy;
     case SendMessage:
       let body = state.newMessageBody;
-      state.MessangerTextArray.push({ id: 4, text: body });
-      state.newMessageBody = "";
-      return state;
+      stateCopy = {
+        ...state,
+        newMessageBody: "",
+        MessangerTextArray: [
+          ...state.MessangerTextArray,
+          { id: 4, text: body },
+        ],
+      };
+      return stateCopy;
     default:
       return state;
   }

@@ -22,8 +22,8 @@ const Messanger = (props) => {
         props.onNewMessageChangeCallBack(text)
     }
 
-    const NewMessangerItemArray = props.MessangerPageItem.map(item => <MessangerItem name={item.name} id={item.id} />) // Просто пробегаемся по массиву объектов, обращаясь каждому элкменту массива через map и отображая его в jsx размете
-    const NewMessangerTextArray = props.MessangerPageText.map(item => <MessangerText className={messangerStyle.text} text={item.text} />)
+    const NewMessangerItemArray = props.MessangerPage.MessangerItemArray.map(item => <MessangerItem name={item.name} id={item.id} />) // Просто пробегаемся по массиву объектов, обращаясь каждому элкменту массива через map и отображая его в jsx размете
+    const NewMessangerTextArray = props.MessangerPage.MessangerTextArray.map(item => <MessangerText className={messangerStyle.text} text={item.text} />)
     return (
         <div className={messangerStyle.messanger}>
             <div className={messangerStyle.messanger_items}>

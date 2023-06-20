@@ -19,6 +19,12 @@ const Nav = () => {
           <span > Messanger</span>
         </div>
       </NavLink>
+      <NavLink to="/Users" className={setActive}>
+        <div className={Navigation.item}>
+          <img src='https://cdn-icons-png.flaticon.com/128/1501/1501259.png' />
+          <span> Users</span>
+        </div>
+      </NavLink>
       <NavLink to="/News" className={setActive}>
         <div className={Navigation.item}>
           <img src='https://icons.veryicon.com/png/o/miscellaneous/effevo/news-262.png' />
