@@ -75,9 +75,9 @@ export const SetPageAC = (currentPage) => ({
   type: SET_CURRENT_PAGE,
   currentPage,
 });
-export const SetTotalValueAC = (allUsers) => ({
+export const SetTotalValueAC = (totalUsersCount) => ({
   type: SET_TATAL_COUNT,
-  allUsers,
+  allUsers: totalUsersCount,
 });
 
 export default UsersPageReducer;
