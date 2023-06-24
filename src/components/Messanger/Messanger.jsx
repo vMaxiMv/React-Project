@@ -12,7 +12,6 @@ import { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/Mes
 </div>
 
 const addMessageReact = React.createRef()
-
 const Messanger = (props) => {
     const onSendMessageClick = () => {
         props.onSendMessageClickCallBack()

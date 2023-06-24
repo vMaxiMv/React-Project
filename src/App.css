@@ -17,7 +17,9 @@
     flex-direction: column;
     color:#fff;
     grid-area: c;
-    background-image: url('https://html-templates.info/wp-content/uploads/140520040122.jpg');
+    background-image: url('https://krot.info/uploads/posts/2022-02/1644832423_15-krot-info-p-foni-dlya-saitov-15.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
     padding:10px 20px 10px 20px ;
     border-radius: 15px;
 }

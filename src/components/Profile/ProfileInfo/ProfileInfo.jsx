@@ -1,7 +1,11 @@
+import Loading from "../../common/loading/loading"
 import MyPosts from "../MyPosts/MyPosts"
 import ProfileInfoStyle from "./ProfileInfo.module.css"
 
 const ProfileInfo = (props) => {
+    if (!props.profile) {
+        return <Loading />
+    }
     return (
         <div >
             {/* <div>
@@ -9,6 +13,7 @@ const ProfileInfo = (props) => {
         </div> */}
             <div>
                 <div>ava+descriptions</div>
+                <img src={props.profile.photos.large} alt="image" />
             </div>
         </div>
     )
