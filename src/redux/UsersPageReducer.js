@@ -7,33 +7,7 @@ const SET_IS_FETCHING = "SET_IS_FETCHING";
 
 let initialState = {
   users: [
-    // {
-    //   id: 1,
-    //   fullname: "Maxim",
-    //   imageUrl:
-    //     "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Photos.png",
-    //   followed: true,
-    //   status: "Whats up!",
-    //   location: { city: "Moscow", country: "Russia" },
-    // },
-    // {
-    //   id: 2,
-    //   fullname: "Ivan",
-    //   imageUrl:
-    //     "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Photos.png",
-    //   followed: false,
-    //   status: "Hey men!",
-    //   location: { city: "NewYork", country: "USA" },
-    // },
-    // {
-    //   id: 3,
-    //   fullname: "Oleg",
-    //   imageUrl:
-    //     "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Photos.png",
-    //   followed: true,
-    //   status: "WTF",
-    //   location: { city: "Tver", country: "Russia" },
-    // },
+
   ],
   usersOnPageCount: 5,
   totalUsersCount: 0,

@@ -1,6 +1,7 @@
 import React from 'react'
 import UsersStyles from './Users.module.css'
 import { NavLink } from 'react-router-dom';
+import axios from "axios";
 
 
 const Users = (props) => {
@@ -33,7 +34,31 @@ const Users = (props) => {
                     <div>
 
                         {/* {u.followed ? props.unfollowCallBack(u.id) : props.followCallBack(u.id)} */}
-                        {u.followed ? <button onClick={() => { props.unfollowCallBack(u.id) }}>Unfollow</button> : <button onClick={() => props.followCallBack(u.id)}>Follow</button>}
+                        {u.followed ? <button onClick={() => {
+                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                                    {withCredentials:true,
+                                        headers: {
+                                            'API-KEY':'0d7b6380-eefc-48a9-b9a7-1c642af2cf08'
+                                        }
+                                    })
+                                    .then(response => {
+                                        if(response.data.resultCode===0)  props.unfollowCallBack(u.id)
+                                    })
+
+
+                        }}>Unfollow</button>
+                            : <button onClick={() => {
+                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                                    {},
+                                    {withCredentials:true,
+                                        headers: {
+                                            'API-KEY':'0d7b6380-eefc-48a9-b9a7-1c642af2cf08'
+                                        }
+                                    })
+                                    .then(response => {
+                                        if(response.data.resultCode===0) props.followCallBack(u.id)
+                                    })
+                               }}>Follow</button>}
                     </div>
                     <div>
                         <h2>{u.name}</h2>

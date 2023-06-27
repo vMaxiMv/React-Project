@@ -1,9 +1,0 @@
-.header{
-    display: flex;
-    grid-area: h;
-    background-color: rgb(112, 208, 232);
-    border-radius: 15px;
-  }
-  .header img{
-    width: 100px;
-  }

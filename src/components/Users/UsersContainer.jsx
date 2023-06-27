@@ -4,6 +4,7 @@ import { FollowAC, SetIsFetchingAC, SetPageAC, SetTotalValueAC, SetUsersAC, UnFo
 import axios from 'axios'
 import Users from './Users';
 import Loading from '../common/loading/loading';
+import {getUsersObj} from "../../api/api";
 
 
 
@@ -15,10 +16,11 @@ class UsersClassContainer extends React.Component {
     }
     componentDidMount() {
         this.props.SetIsFetchingCallBack(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersOnPageCount}`)
-            .then(response => {
-                this.props.SetUsersCallBack(response.data.items)
-                this.props.SetTotalValueCallBack(response.data.totalCount)
+        getUsersObj.getUsersFunc(this.props.currentPage, this.props.usersOnPageCount)
+            .then(data => {
+
+                this.props.SetUsersCallBack(data.items)
+                this.props.SetTotalValueCallBack(data.totalCount)
                 this.props.SetIsFetchingCallBack(false)
             })
 
@@ -26,9 +28,12 @@ class UsersClassContainer extends React.Component {
     pageChanged = (p) => {
         this.props.SetIsFetchingCallBack(true)
         this.props.SetPageCallBack(p)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.usersOnPageCount}`)
-            .then(response => {
-                this.props.SetUsersCallBack(response.data.items)
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.usersOnPageCount}`,
+        //     {withCredentials:true}
+        //     )
+            getUsersObj.getUsersFunc(p, this.props.usersOnPageCount)
+            .then(data => {
+                this.props.SetUsersCallBack(data.items)
                 this.props.SetIsFetchingCallBack(false)
             })
     }

@@ -17,6 +17,7 @@ const Messanger = (props) => {
         props.onSendMessageClickCallBack()
     }
     const onNewMessageChange = () => {
+        debugger
         const text = addMessageReact.current.value;
         props.onNewMessageChangeCallBack(text)
     }
