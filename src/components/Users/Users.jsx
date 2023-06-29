@@ -34,7 +34,8 @@ const Users = (props) => {
                     <div>
 
                         {/* {u.followed ? props.unfollowCallBack(u.id) : props.followCallBack(u.id)} */}
-                        {u.followed ? <button onClick={() => {
+                        {u.followed ? <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
+                            props.toggleFollowingDisableCallBack(true, u.id)
                                 axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
                                     {withCredentials:true,
                                         headers: {
@@ -43,11 +44,13 @@ const Users = (props) => {
                                     })
                                     .then(response => {
                                         if(response.data.resultCode===0)  props.unfollowCallBack(u.id)
+                                        props.toggleFollowingDisableCallBack(false, u.id)
                                     })
 
 
                         }}>Unfollow</button>
-                            : <button onClick={() => {
+                            : <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
+                                props.toggleFollowingDisableCallBack(true, u.id)
                                 axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
                                     {},
                                     {withCredentials:true,
@@ -57,6 +60,7 @@ const Users = (props) => {
                                     })
                                     .then(response => {
                                         if(response.data.resultCode===0) props.followCallBack(u.id)
+                                        props.toggleFollowingDisableCallBack(false, u.id)
                                     })
                                }}>Follow</button>}
                     </div>

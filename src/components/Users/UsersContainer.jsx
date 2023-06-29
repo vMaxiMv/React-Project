@@ -1,6 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { FollowAC, SetIsFetchingAC, SetPageAC, SetTotalValueAC, SetUsersAC, UnFollowAC } from '../../redux/UsersPageReducer';
+import {
+    FollowAC,
+    SetIsFetchingAC,
+    SetPageAC,
+    SetTotalValueAC,
+    SetUsersAC,
+    toggleFollowingDisableAC,
+    UnFollowAC
+} from '../../redux/UsersPageReducer';
 import axios from 'axios'
 import Users from './Users';
 import Loading from '../common/loading/loading';
@@ -52,6 +60,8 @@ class UsersClassContainer extends React.Component {
                 pageChanged={this.pageChanged}
                 unfollowCallBack={this.props.unfollowCallBack}
                 followCallBack={this.props.followCallBack}
+                   toggleFollowingDisableCallBack={this.props.toggleFollowingDisableCallBack}
+                   followingInProgress={this.props.followingInProgress}
             />
         </>
     }
@@ -63,7 +73,8 @@ const mapStateToProps = (state) => {
         usersOnPageCount: state.UsersPage.usersOnPageCount,
         totalUsersCount: state.UsersPage.totalUsersCount,
         currentPage: state.UsersPage.currentPage,
-        loadingStatus: state.UsersPage.loadingStatus
+        loadingStatus: state.UsersPage.loadingStatus,
+        followingInProgress:state.UsersPage.followingInProgress
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -73,7 +84,8 @@ const mapDispatchToProps = (dispatch) => {
         SetUsersCallBack: (users) => dispatch(SetUsersAC(users)),
         SetPageCallBack: (currentPage) => dispatch(SetPageAC(currentPage)),
         SetTotalValueCallBack: (allUsers) => dispatch(SetTotalValueAC(allUsers)),
-        SetIsFetchingCallBack: (isFetching) => dispatch(SetIsFetchingAC(isFetching))
+        SetIsFetchingCallBack: (isFetching) => dispatch(SetIsFetchingAC(isFetching)),
+        toggleFollowingDisableCallBack: (isFetching, userId) => dispatch(toggleFollowingDisableAC(isFetching, userId))
 
     }
 }

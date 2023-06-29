@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import { selectProfileAC } from '../../redux/ProfilePageReducer';
 import axios from 'axios'
 import {useParams} from "react-router-dom";
+
 //import myProfile from './Profile.module.css';
-
-
 // class ProfileContainer extends React.Component {
 //     componentDidMount() {
 //         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/8`)
