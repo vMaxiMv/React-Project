@@ -14,7 +14,8 @@ const ProfileInfo = (props) => {
         </div> */}
             <div>
                 <div>{status ? status: 'Ничего особенного'}</div>
-                <img src={props.profile.photos.large} alt="image" />
+                {/*<img src={props.profile.photos.large} alt="image" />*/}
+                <img src={props.profile.photos.large !==null ? props.profile.photos.large : "https://w7.pngwing.com/pngs/165/45/png-transparent-computer-icons-male-avatar-white-collar-miscellaneous-blue-text.png"} className={ProfileInfoStyle.img}/>
             </div>
         </div>
     )

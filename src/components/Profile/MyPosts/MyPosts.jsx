@@ -19,7 +19,7 @@ const MyPosts = (props) => {
 
         const text = addPostReact.current.value;
         props.PostChangeCallBack(text)
-        debugger
+
     }
     const NewMyPostArray = props.ProfilePage.map(item => <Post message={item.message} likes={item.likes} />)
     return (

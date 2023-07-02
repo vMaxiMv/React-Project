@@ -1,3 +1,6 @@
+import {UsersApiObj} from "../api/api";
+import {FollowAC, toggleFollowingDisableAC} from "./UsersPageReducer";
+
 const AddPost = "ADD-POST";
 const UpdateNewPostText = "UPDATE-NEW-POST-TEXT";
 const SELECT_PROFILE = "SELECT_PROFILE";
@@ -48,5 +51,15 @@ export const updatePostTextActionCreator = (text) => {
 export const selectProfileAC = (profile) => {
   return { type: "SELECT_PROFILE", profile: profile };
 };
+
+
+export const profileThunk = (userId)=> {
+  return (dispatch) => {
+    UsersApiObj.profileFunc(userId)
+        .then(response => {
+          dispatch(selectProfileAC(response.data))
+        })
+  }
+}
 
 export default ProfilePageReducer;

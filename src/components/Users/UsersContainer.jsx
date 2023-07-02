@@ -1,49 +1,46 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import {
-    FollowAC,
-    SetIsFetchingAC,
-    SetPageAC,
-    SetTotalValueAC,
-    SetUsersAC,
+    FollowAC, followThunk, getUsersThunk,
     toggleFollowingDisableAC,
-    UnFollowAC
+    UnFollowAC, unfollowThunk
 } from '../../redux/UsersPageReducer';
-import axios from 'axios'
 import Users from './Users';
 import Loading from '../common/loading/loading';
-import {getUsersObj} from "../../api/api";
+
 
 
 
 
 class UsersClassContainer extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
     componentDidMount() {
-        this.props.SetIsFetchingCallBack(true)
-        getUsersObj.getUsersFunc(this.props.currentPage, this.props.usersOnPageCount)
-            .then(data => {
-
-                this.props.SetUsersCallBack(data.items)
-                this.props.SetTotalValueCallBack(data.totalCount)
-                this.props.SetIsFetchingCallBack(false)
-            })
-
+        // this.props.SetIsFetchingCallBack(true)
+        // getUsersObj.getUsersFunc(this.props.currentPage, this.props.usersOnPageCount)
+        //     .then(data => {
+        //
+        //         this.props.SetUsersCallBack(data.items)
+        //         this.props.SetTotalValueCallBack(data.totalCount)
+        //         this.props.SetIsFetchingCallBack(false)
+        //     })
+        this.props.getUsersThunk(this.props.currentPage, this.props.usersOnPageCount)
     }
     pageChanged = (p) => {
-        this.props.SetIsFetchingCallBack(true)
-        this.props.SetPageCallBack(p)
+        // this.props.SetIsFetchingCallBack(true)
+        // this.props.SetPageCallBack(p)
+        this.props.getUsersThunk(p, this.props.usersOnPageCount)
         // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.usersOnPageCount}`,
         //     {withCredentials:true}
         //     )
-            getUsersObj.getUsersFunc(p, this.props.usersOnPageCount)
-            .then(data => {
-                this.props.SetUsersCallBack(data.items)
-                this.props.SetIsFetchingCallBack(false)
-            })
+
+        //     getUsersObj.getUsersFunc(p, this.props.usersOnPageCount)
+        //     .then(data => {
+        //         this.props.SetUsersCallBack(data.items)
+        //         this.props.SetIsFetchingCallBack(false)
+        //     })
     }
 
 
@@ -58,9 +55,11 @@ class UsersClassContainer extends React.Component {
                 usersOnPageCount={this.props.usersOnPageCount}
                 currentPage={this.props.currentPage}
                 pageChanged={this.pageChanged}
-                unfollowCallBack={this.props.unfollowCallBack}
-                followCallBack={this.props.followCallBack}
-                   toggleFollowingDisableCallBack={this.props.toggleFollowingDisableCallBack}
+               // unfollowCallBack={this.props.unfollowCallBack}
+               // followCallBack={this.props.followCallBack}
+                   //toggleFollowingDisableCallBack={this.props.toggleFollowingDisableCallBack}
+                followThunk = {this.props.followThunk}
+                   unfollowThunk = {this.props.unfollowThunk}
                    followingInProgress={this.props.followingInProgress}
             />
         </>
@@ -79,19 +78,17 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        followCallBack: (userId) => dispatch(FollowAC(userId)),  //Диспатчим результат работы AC Т.е action,поскольку вызываем функцию
-        unfollowCallBack: (userId) => dispatch(UnFollowAC(userId)),
-        SetUsersCallBack: (users) => dispatch(SetUsersAC(users)),
-        SetPageCallBack: (currentPage) => dispatch(SetPageAC(currentPage)),
-        SetTotalValueCallBack: (allUsers) => dispatch(SetTotalValueAC(allUsers)),
-        SetIsFetchingCallBack: (isFetching) => dispatch(SetIsFetchingAC(isFetching)),
-        toggleFollowingDisableCallBack: (isFetching, userId) => dispatch(toggleFollowingDisableAC(isFetching, userId))
+        // followCallBack: (userId) => dispatch(FollowAC(userId)),  //Диспатчим результат работы AC Т.е action,поскольку вызываем функцию
+        // unfollowCallBack: (userId) => dispatch(UnFollowAC(userId)),
+        // toggleFollowingDisableCallBack: (isFetching, userId) => dispatch(toggleFollowingDisableAC(isFetching, userId)),
+        // getUsersThunkCallBack:(currentPage,usersOnPageCount) => dispatch(getUsersThunk(currentPage,usersOnPageCount))
+
 
     }
 }
 
 
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClassContainer)
+const UsersContainer = connect(mapStateToProps, {getUsersThunk, followThunk, unfollowThunk})(UsersClassContainer)
 
 export default UsersContainer;

@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react'
 import Profile from './Profile';
 import { connect } from 'react-redux';
-import { selectProfileAC } from '../../redux/ProfilePageReducer';
+import {profileThunk, selectProfileAC} from '../../redux/ProfilePageReducer';
 import axios from 'axios'
 import {useParams} from "react-router-dom";
+import {UsersApiObj} from "../../api/api";
 
 //import myProfile from './Profile.module.css';
 // class ProfileContainer extends React.Component {
@@ -31,11 +32,13 @@ function ProfileContainer(props){
         userId = 2;
     }
     useEffect(()=>{
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-             .then(response => {
-                props.selectProfileCallBack(response.data)
-             })
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
 
+        // UsersApiObj.profileFunc(userId)
+        //      .then(response => {
+        //         props.selectProfileCallBack(response.data)
+        //      })
+        props.profileThunk(userId)
     }, [userId])
     return (
         <div>  <Profile {...props} profile={props.profile}  /></div>
@@ -47,11 +50,11 @@ const mapStateToProps = (state) => {
         profile: state.ProfilePage.profile
     }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        selectProfileCallBack: (profile) => dispatch(selectProfileAC(profile))
-    }
-}
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         selectProfileCallBack: (profile) => dispatch(selectProfileAC(profile))
+//     }
+// }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);
+export default connect(mapStateToProps, {profileThunk})(ProfileContainer);

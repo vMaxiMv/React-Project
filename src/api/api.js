@@ -10,11 +10,28 @@ const instance = axios.create(
 )
 
 
-export const getUsersObj = {
+export const UsersApiObj = {
     getUsersFunc (currentPage, usersOnPageCount){
         return instance.get(`users?page=${currentPage}&count=${usersOnPageCount}`)
             .then(response=>{
                 return response.data
             })
-        }
+        },
+    unfollowUrlFunc(userId){
+        return instance.delete(`follow/${userId}`)
+    },
+    followUrlFunc(userId){
+        return instance.post(`follow/${userId}`)
+    },
+    authMeFunc(){
+        return instance.get('/auth/me')
+    },
+    profileFunc(userId){
+        return instance.get(`/profile/${userId}`)
+    }
 }
+
+
+
+
+

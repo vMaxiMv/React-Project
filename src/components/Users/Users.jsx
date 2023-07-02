@@ -1,7 +1,8 @@
 import React from 'react'
 import UsersStyles from './Users.module.css'
 import { NavLink } from 'react-router-dom';
-import axios from "axios";
+import { UsersApiObj} from "../../api/api";
+import {followThunk, unfollowThunk} from "../../redux/UsersPageReducer";
 
 
 const Users = (props) => {
@@ -35,33 +36,42 @@ const Users = (props) => {
 
                         {/* {u.followed ? props.unfollowCallBack(u.id) : props.followCallBack(u.id)} */}
                         {u.followed ? <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
-                            props.toggleFollowingDisableCallBack(true, u.id)
-                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                    {withCredentials:true,
-                                        headers: {
-                                            'API-KEY':'0d7b6380-eefc-48a9-b9a7-1c642af2cf08'
-                                        }
-                                    })
-                                    .then(response => {
-                                        if(response.data.resultCode===0)  props.unfollowCallBack(u.id)
-                                        props.toggleFollowingDisableCallBack(false, u.id)
-                                    })
-
+                                // БЫЛО //
+                                // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                                //     {withCredentials:true,
+                                //         headers: {
+                                //             'API-KEY':'0d7b6380-eefc-48a9-b9a7-1c642af2cf08'
+                                //         }
+                                //     })
+                                // СТАЛО //
+                                // props.toggleFollowingDisableCallBack(true, u.id)
+                                // UsersApiObj.unfollowUrlFunc(u.id)
+                                //     .then(response => {
+                                //         if(response.data.resultCode===0)  props.unfollowCallBack(u.id)
+                                //         props.toggleFollowingDisableCallBack(false, u.id)
+                                //     })
+                                // СТАЛО ПОСЛЕ ПОЯВЛЯЕНИЯ THUNK
+                                props.unfollowThunk(u.id)
 
                         }}>Unfollow</button>
                             : <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
-                                props.toggleFollowingDisableCallBack(true, u.id)
-                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                    {},
-                                    {withCredentials:true,
-                                        headers: {
-                                            'API-KEY':'0d7b6380-eefc-48a9-b9a7-1c642af2cf08'
-                                        }
-                                    })
-                                    .then(response => {
-                                        if(response.data.resultCode===0) props.followCallBack(u.id)
-                                        props.toggleFollowingDisableCallBack(false, u.id)
-                                    })
+                                // БЫЛО //
+                                // axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                                //     {},
+                                //     {withCredentials:true,
+                                //         headers: {
+                                //             'API-KEY':'0d7b6380-eefc-48a9-b9a7-1c642af2cf08'
+                                //         }
+                                //     })
+                                // СТАЛО //
+                                // props.toggleFollowingDisableCallBack(true, u.id)
+                                // UsersApiObj.followUrlFunc(u.id)
+                                //     .then(response => {
+                                //         if(response.data.resultCode===0) props.followCallBack(u.id)
+                                //         props.toggleFollowingDisableCallBack(false, u.id)
+                                //     })
+                                // СТАЛО ПОСЛЕ ПОЯВЛЯЕНИЯ THUNK
+                                props.followThunk(u.id)
                                }}>Follow</button>}
                     </div>
                     <div>
