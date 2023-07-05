@@ -6,6 +6,7 @@ import axios from 'axios'
 import {Navigate, useParams} from "react-router-dom";
 import {UsersApiObj} from "../../api/api";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 //import myProfile from './Profile.module.css';
 // class ProfileContainer extends React.Component {
@@ -48,7 +49,7 @@ function ProfileContainer(props){
         <div>  <Profile {...props} profile={props.profile}  /></div>
     )
 }
-let redirectComponent = withAuthRedirect(ProfileContainer)
+// let redirectComponent = withAuthRedirect(ProfileContainer) // HOC
 const mapStateToProps = (state) => {
     return {
         profile: state.ProfilePage.profile,
@@ -62,4 +63,8 @@ const mapStateToProps = (state) => {
 // }
 
 
-export default connect(mapStateToProps, {profileThunk})(redirectComponent);
+export default compose(
+    connect(mapStateToProps, {profileThunk}),
+    withAuthRedirect
+)
+(ProfileContainer)

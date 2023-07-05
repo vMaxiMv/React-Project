@@ -5,6 +5,7 @@ import Messanger from './Messanger';
 
 import { connect } from 'react-redux';
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 
@@ -29,7 +30,7 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 //     </StoreContext.Consumer>
 //}
 
-let redirectComponent = withAuthRedirect(Messanger)
+// let redirectComponent = withAuthRedirect(Messanger)
 const mapStateToProps = (state) => {
     return {
         MessangerPage: state.MessangerPage,
@@ -48,6 +49,11 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const MessangerContainer = connect(mapStateToProps, mapDispatchToProps)(redirectComponent)
 
-export default MessangerContainer;
+
+// const MessangerContainer = connect(mapStateToProps, mapDispatchToProps)(redirectComponent)
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect)
+(Messanger);
