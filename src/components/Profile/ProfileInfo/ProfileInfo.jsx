@@ -1,12 +1,15 @@
 import Loading from "../../common/loading/loading"
 import MyPosts from "../MyPosts/MyPosts"
 import ProfileInfoStyle from "./ProfileInfo.module.css"
+import {Navigate} from "react-router-dom";
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
         return <Loading />
     }
     let status = props.profile.aboutMe
+
+
     return (
         <div >
             {/* <div>

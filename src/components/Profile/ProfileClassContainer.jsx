@@ -3,8 +3,9 @@ import Profile from './Profile';
 import { connect } from 'react-redux';
 import {profileThunk, selectProfileAC} from '../../redux/ProfilePageReducer';
 import axios from 'axios'
-import {useParams} from "react-router-dom";
+import {Navigate, useParams} from "react-router-dom";
 import {UsersApiObj} from "../../api/api";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 //import myProfile from './Profile.module.css';
 // class ProfileContainer extends React.Component {
@@ -40,14 +41,18 @@ function ProfileContainer(props){
         //      })
         props.profileThunk(userId)
     }, [userId])
+
+    // if(!props.isAuth) return <Navigate to='/Login' />
+
     return (
         <div>  <Profile {...props} profile={props.profile}  /></div>
     )
 }
-
+let redirectComponent = withAuthRedirect(ProfileContainer)
 const mapStateToProps = (state) => {
     return {
-        profile: state.ProfilePage.profile
+        profile: state.ProfilePage.profile,
+        isAuth: state.Auth.isAuth
     }
 }
 // const mapDispatchToProps = (dispatch) => {
@@ -57,4 +62,4 @@ const mapStateToProps = (state) => {
 // }
 
 
-export default connect(mapStateToProps, {profileThunk})(ProfileContainer);
+export default connect(mapStateToProps, {profileThunk})(redirectComponent);

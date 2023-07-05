@@ -4,6 +4,7 @@ import { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/Mes
 import Messanger from './Messanger';
 
 import { connect } from 'react-redux';
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 
@@ -28,10 +29,12 @@ import { connect } from 'react-redux';
 //     </StoreContext.Consumer>
 //}
 
+let redirectComponent = withAuthRedirect(Messanger)
 const mapStateToProps = (state) => {
     return {
         MessangerPage: state.MessangerPage,
-        newMessageBody: state.MessangerPage.newMessageBody
+        newMessageBody: state.MessangerPage.newMessageBody,
+        isAuth: state.Auth.isAuth
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -45,6 +48,6 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const MessangerContainer = connect(mapStateToProps, mapDispatchToProps)(Messanger)
+const MessangerContainer = connect(mapStateToProps, mapDispatchToProps)(redirectComponent)
 
 export default MessangerContainer;

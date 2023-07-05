@@ -12,6 +12,7 @@ import MessangerContainer from "./components/Messanger/MessangerContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileClassContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 function App(props) {
   return (
@@ -27,6 +28,7 @@ function App(props) {
             <Route path="/News" element={<News />} />
             <Route path="/Music" element={<Music />} />
             <Route path="/Settings" element={<Settings />} />
+            <Route path="/Login" element={<Login />} />
 
             <Route path="/Users" element={<UsersContainer />} />
           </Routes>

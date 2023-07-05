@@ -1,6 +1,6 @@
 import React from 'react'
 import messangerStyle from './Messanger.module.css';
-import { NavLink } from "react-router-dom"
+import {Navigate, NavLink} from "react-router-dom"
 import MessangerItem from './MessangerItem/MessangerItem';
 import MessangerText from './MessangerText/MessangerText';
 import { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/MessangerPageReducer';
@@ -21,6 +21,8 @@ const Messanger = (props) => {
         const text = addMessageReact.current.value;
         props.onNewMessageChangeCallBack(text)
     }
+    // if(!props.isAuth) return <Navigate to='/Login' />
+
 
     const NewMessangerItemArray = props.MessangerPage.MessangerItemArray.map(item => <MessangerItem name={item.name} id={item.id} />) // Просто пробегаемся по массиву объектов, обращаясь каждому элкменту массива через map и отображая его в jsx размете
     const NewMessangerTextArray = props.MessangerPage.MessangerTextArray.map(item => <MessangerText className={messangerStyle.text} text={item.text} />)
