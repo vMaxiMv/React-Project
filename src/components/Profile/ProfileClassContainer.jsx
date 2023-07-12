@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import Profile from './Profile';
 import { connect } from 'react-redux';
-import {profileThunk, selectProfileAC} from '../../redux/ProfilePageReducer';
+import {getStatusThunk, profileThunk, selectProfileAC, updateStatusThunk} from '../../redux/ProfilePageReducer';
 import axios from 'axios'
 import {Navigate, useParams} from "react-router-dom";
 import {UsersApiObj} from "../../api/api";
@@ -41,19 +41,22 @@ function ProfileContainer(props){
         //         props.selectProfileCallBack(response.data)
         //      })
         props.profileThunk(userId)
+        props.getStatusThunk(userId)
+
     }, [userId])
 
     // if(!props.isAuth) return <Navigate to='/Login' />
 
     return (
-        <div>  <Profile {...props} profile={props.profile}  /></div>
+        <div>  <Profile {...props} profile={props.profile} status={props.status} updateStatusThunk={props.updateStatusThunk} /></div>
     )
 }
 // let redirectComponent = withAuthRedirect(ProfileContainer) // HOC
 const mapStateToProps = (state) => {
     return {
         profile: state.ProfilePage.profile,
-        isAuth: state.Auth.isAuth
+        isAuth: state.Auth.isAuth,
+        status: state.ProfilePage.status
     }
 }
 // const mapDispatchToProps = (dispatch) => {
@@ -64,7 +67,7 @@ const mapStateToProps = (state) => {
 
 
 export default compose(
-    connect(mapStateToProps, {profileThunk}),
+    connect(mapStateToProps, {profileThunk, getStatusThunk, updateStatusThunk}),
     withAuthRedirect
 )
 (ProfileContainer)

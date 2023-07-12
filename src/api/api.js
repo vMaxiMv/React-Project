@@ -24,10 +24,16 @@ export const UsersApiObj = {
         return instance.post(`follow/${userId}`)
     },
     authMeFunc(){
-        return instance.get('/auth/me')
+        return instance.get('auth/me')
     },
     profileFunc(userId){
-        return instance.get(`/profile/${userId}`)
+        return instance.get(`profile/${userId}`)
+    },
+    getStatusFunc(userId){
+        return instance.get(`profile/status/${userId}`)
+    },
+    updateStatusFunc(status){
+        return instance.put(`profile/status`, {status:status})
     }
 }
 
