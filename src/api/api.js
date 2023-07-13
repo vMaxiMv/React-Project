@@ -34,6 +34,12 @@ export const UsersApiObj = {
     },
     updateStatusFunc(status){
         return instance.put(`profile/status`, {status:status})
+    },
+    loginFunc(email, password, rememberMe = false){
+        return instance.post('auth/login', {email, password, rememberMe})
+    },
+    logoutFunc(){
+        return instance.delete('auth/login')
     }
 }
 

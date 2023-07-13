@@ -4,6 +4,7 @@ import ProfilePageReducer from "./ProfilePageReducer";
 import UsersPageReducer from "./UsersPageReducer";
 import AuthReducer from "./AuthReducer";
 import thunkMiddleware from 'redux-thunk'
+import formReducer from "./formReducer";
 
 let reducers = combineReducers({
   MessangerPage: MessangerPageReducer,

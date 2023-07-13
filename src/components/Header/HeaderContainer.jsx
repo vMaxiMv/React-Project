@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import axios from "axios";
 import Header from "./Header";
-import {authMeThunk, SetAuthUserData} from "../../redux/AuthReducer";
+import {authMeThunk, logoutThunk, SetAuthUserData} from "../../redux/AuthReducer";
 import {connect} from "react-redux";
 import {UsersApiObj} from "../../api/api";
 
@@ -35,4 +35,4 @@ const mapStateToProps = (state)=>({
     login:state.Auth.login
 
 })
-export default connect(mapStateToProps,{SetAuthUserData,authMeThunk})(HeaderContainer);
+export default connect(mapStateToProps,{SetAuthUserData,authMeThunk, logoutThunk})(HeaderContainer);
