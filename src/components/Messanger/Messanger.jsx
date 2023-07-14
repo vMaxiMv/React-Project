@@ -1,9 +1,10 @@
 import React from 'react'
 import messangerStyle from './Messanger.module.css';
-import {Navigate, NavLink} from "react-router-dom"
 import MessangerItem from './MessangerItem/MessangerItem';
 import MessangerText from './MessangerText/MessangerText';
-import { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/MessangerPageReducer';
+import {addMessageCreator} from '../../redux/MessangerPageReducer';
+import {useDispatch, useSelector} from "react-redux";
+import {useForm} from "react-hook-form";
 
 
 <div>
@@ -11,17 +12,22 @@ import { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/Mes
     <MessangerText />
 </div>
 
-const addMessageReact = React.createRef()
+//const addMessageReact = React.createRef()
 const Messanger = (props) => {
-    const onSendMessageClick = () => {
-        props.onSendMessageClickCallBack()
+    const dispatch = useDispatch(); // Используется для получения функции диспатч Redux
+
+    const {register, handleSubmit, reset } = useForm() // Этот хук позволяет управлять сосотяние формы и обрабатывать ее отправку
+
+        // register регистрирует поле ввода формы и связывает его со значением валидации
+        // handleSubmit обрабатывает отправку формы и вызывает определнную функцию обратного вызова для успешной валидации
+    const onSendMessageClick = (data) => {
+        dispatch(addMessageCreator(data.message));
+        reset ()
     }
-    const onNewMessageChange = () => {
-        debugger
-        const text = addMessageReact.current.value;
-        props.onNewMessageChangeCallBack(text)
-    }
-    // if(!props.isAuth) return <Navigate to='/Login' />
+// Функция обработчика события отправки формы. Когда форма отправляется, функция вызывается. Она принимает объект data, который содержит значения полей формы.
+// Внутри этой функции мы диспатчим действия addMessageCreator, передвая ему значение data.message - сообщение из поля ввода
+
+    // const newMessageBody = useSelector((state)=>state.MessangerPage.newMessageBody)
 
 
     const NewMessangerItemArray = props.MessangerPage.MessangerItemArray.map(item => <MessangerItem name={item.name} id={item.id} />) // Просто пробегаемся по массиву объектов, обращаясь каждому элкменту массива через map и отображая его в jsx размете
@@ -35,8 +41,12 @@ const Messanger = (props) => {
             </div>
             <div className={messangerStyle.messages}>
                 <div>{NewMessangerTextArray}</div>
-                <div><textarea ref={addMessageReact} placeholder='Введите сообщение' value={props.newMessageBody} onChange={onNewMessageChange}></textarea></div>
-                <div><button onClick={onSendMessageClick}>Send</button></div>
+                <form onSubmit={handleSubmit(onSendMessageClick)}>
+                    <div><input type="text" {...register('message')} placeholder='Введите сообщение'  /></div>
+                    <div>
+                        <button type="submit">Send</button>
+                    </div>
+                </form>
             </div>
         </div>
     )

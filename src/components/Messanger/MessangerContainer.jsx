@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { sendMessageCreator, updateNewMessageBodyCreator } from '../../redux/MessangerPageReducer';
+import {addMessageCreator, sendMessageCreator, updateNewMessageBodyCreator} from '../../redux/MessangerPageReducer';
 import Messanger from './Messanger';
 
 import { connect } from 'react-redux';
@@ -33,27 +33,19 @@ import {compose} from "redux";
 // let redirectComponent = withAuthRedirect(Messanger)
 const mapStateToProps = (state) => {
     return {
+
         MessangerPage: state.MessangerPage,
         newMessageBody: state.MessangerPage.newMessageBody,
         isAuth: state.Auth.isAuth
     }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onSendMessageClickCallBack: () => {
-            dispatch(sendMessageCreator())
-        },
-        onNewMessageChangeCallBack: (text) => {
-            dispatch(updateNewMessageBodyCreator(text))
-        }
-    }
-}
+
 
 
 
 // const MessangerContainer = connect(mapStateToProps, mapDispatchToProps)(redirectComponent)
 
 export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
+    connect(mapStateToProps),
     withAuthRedirect)
 (Messanger);

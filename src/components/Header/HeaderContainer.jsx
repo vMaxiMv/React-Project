@@ -7,21 +7,6 @@ import {UsersApiObj} from "../../api/api";
 
 function HeaderContainer(props) {
     useEffect(()=> {
-            // axios.get('https://social-network.samuraijs.com/api/1.0/auth/me',{
-            //     withCredentials:true
-            // })
-
-        // UsersApiObj.authMeFunc()
-        //         .then(response => {
-        //
-        //             if(response.data.resultCode === 0){
-        //                 let {id, email,login} = response.data.data
-        //                 props.SetAuthUserData(id, email,login)
-        //
-        //             }
-        //             // props.SetAuthUserData(response.data.data.login)
-        //         })
-
         props.authMeThunk()
         }
     )
