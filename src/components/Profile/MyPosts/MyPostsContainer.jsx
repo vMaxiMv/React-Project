@@ -1,5 +1,5 @@
 import React from 'react'
-import { addPostActionCreator, updatePostTextActionCreator } from '../../../redux/ProfilePageReducer';
+import {addPostActionCreator, newPostCreator, updatePostTextActionCreator} from '../../../redux/ProfilePageReducer';
 import MyPosts from './MyPosts';
 import { connect } from 'react-redux';
 
@@ -34,17 +34,17 @@ import { connect } from 'react-redux';
 const mapStateToProps = (state) => {
     return {
         ProfilePage: state.ProfilePage.Posts,
-        newPostText: state.ProfilePage.newPostText
+        //newPostText: state.ProfilePage.newPostText
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addPostCallBack: () => { dispatch(addPostActionCreator()) },
-        PostChangeCallBack: (text) => { dispatch(updatePostTextActionCreator(text)) }
-    }
-}
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         addPostCallBack: () => { dispatch(addPostActionCreator()) },
+//         PostChangeCallBack: (text) => { dispatch(updatePostTextActionCreator(text)) }
+//     }
+// }
 // С помощью connect() получаем из контекста кусок state и ActionCreactor. А также она создает контейнерную компненту, которая хранит в себе процедурную MyPosts
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+const MyPostsContainer = connect(mapStateToProps, {newPostCreator})(MyPosts)
 
 export default MyPostsContainer;

@@ -1,8 +1,9 @@
 import {UsersApiObj} from "../api/api";
 import {FollowAC, toggleFollowingDisableAC} from "./UsersPageReducer";
 
-const AddPost = "ADD-POST";
-const UpdateNewPostText = "UPDATE-NEW-POST-TEXT";
+// const AddPost = "ADD-POST";
+// const UpdateNewPostText = "UPDATE-NEW-POST-TEXT";
+const ADD_POST = "ADD_POST"
 const SELECT_PROFILE = "SELECT_PROFILE";
 const SET_STATUS = "SET_STATUS";
 
@@ -19,23 +20,29 @@ let initialState = {
 const ProfilePageReducer = (state = initialState, action) => {
   let stateCopy;
   switch (action.type) {
-    case AddPost:
-      stateCopy = {
-        ...state,
-        newPostText: "",
-        Posts: [
-          ...state.Posts,
-          {
-            id: 3,
-            message: state.newPostText,
-            likes: 0,
-          },
-        ],
-      };
+    // case AddPost:
+    //   stateCopy = {
+    //     ...state,
+    //     newPostText: "",
+    //     Posts: [
+    //       ...state.Posts,
+    //       {
+    //         id: 3,
+    //         post: state.newPostText,
+    //         likes: Math.floor(Math.random() * 101),
+    //       },
+    //     ],
+    //   };
+    //
+    //   return stateCopy;
+    // case UpdateNewPostText:
+    //   return stateCopy = { ...state, newPostText: action.Newtext };
 
-      return stateCopy;
-    case UpdateNewPostText:
-      return stateCopy = { ...state, newPostText: action.Newtext };
+    case ADD_POST:
+      stateCopy = { ...state, newPostText: "", Posts: [...state.Posts, {id: state.Posts.length+1, message: action.text, likes: Math.floor(Math.random() * 101)},
+        ],
+      }
+      return stateCopy
     case SELECT_PROFILE:
       return stateCopy = { ...state, profile: action.profile };
     case SET_STATUS:
@@ -44,13 +51,17 @@ const ProfilePageReducer = (state = initialState, action) => {
       return state;
   }
 };
+export const newPostCreator = (text)=>{
+  return {type: "ADD_POST", text}
+}
 
-export const addPostActionCreator = () => {
-  return { type: "ADD-POST" };
-};
-export const updatePostTextActionCreator = (text) => {
-  return { type: "UPDATE-NEW-POST-TEXT", Newtext: text };
-};
+
+// export const addPostActionCreator = () => {
+//   return { type: "ADD-POST" };
+// };
+// export const updatePostTextActionCreator = (text) => {
+//   return { type: "UPDATE-NEW-POST-TEXT", Newtext: text };
+// };
 export const selectProfileAC = (profile) => {
   return { type: "SELECT_PROFILE", profile: profile };
 };

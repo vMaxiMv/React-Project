@@ -37,7 +37,7 @@ const Messanger = (props) => {
             <div className={messangerStyle.messanger_items}>
 
                 {NewMessangerItemArray}
-
+ЗЗ
             </div>
             <div className={messangerStyle.messages}>
                 <div>{NewMessangerTextArray}</div>
