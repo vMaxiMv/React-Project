@@ -42,7 +42,7 @@ export const  loginThunk = (email, password, rememberMe)=>{
     UsersApiObj.loginFunc(email, password, rememberMe)
         .then(response => {
           if(response.data.resultCode === 0) dispatch(authMeThunk())
-          if(response.data.resultCode!==0) alert("Неверное что-то")
+          //if(response.data.resultCode!==0) alert("Неверное что-то")
         })
   }
 }
