@@ -1,16 +1,10 @@
-import React, {useEffect} from 'react';
-import axios from "axios";
+import React from 'react';
 import Header from "./Header";
-import {authMeThunk, logoutThunk, SetAuthUserData} from "../../redux/AuthReducer";
+import { logoutThunk, SetAuthUserData} from "../../redux/AuthReducer";
 import {connect} from "react-redux";
-import {UsersApiObj} from "../../api/api";
+
 
 function HeaderContainer(props) {
-    useEffect(()=> {
-        props.authMeThunk()
-        }
-    )
-
     return (
         <Header {...props}/>
     );
@@ -20,4 +14,4 @@ const mapStateToProps = (state)=>({
     login:state.Auth.login
 
 })
-export default connect(mapStateToProps,{SetAuthUserData,authMeThunk, logoutThunk})(HeaderContainer);
+export default connect(mapStateToProps,{SetAuthUserData, logoutThunk})(HeaderContainer);

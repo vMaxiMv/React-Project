@@ -26,7 +26,7 @@ export const SetAuthUserData = (userId, email, login, isAuth) => ({ type: SET_US
 
 export const  authMeThunk = ()=>{ // Так как запрос на сервер никаких параметров не принимает, то можно ничего не передавать во внешнюю функцию
   return(dispatch)=>{
-    UsersApiObj.authMeFunc()
+    return  UsersApiObj.authMeFunc()
         .then(response => {
 
           if(response.data.resultCode === 0){
@@ -37,12 +37,16 @@ export const  authMeThunk = ()=>{ // Так как запрос на серве�
         })
   }
   }
-export const  loginThunk = (email, password, rememberMe)=>{
+export const  loginThunk = (email, password, rememberMe, setError)=>{
   return(dispatch)=>{
     UsersApiObj.loginFunc(email, password, rememberMe)
         .then(response => {
           if(response.data.resultCode === 0) dispatch(authMeThunk())
-          //if(response.data.resultCode!==0) alert("Неверное что-то")
+          else{
+              setError('server',{
+                  message: response.data.messages
+              })
+          }
         })
   }
 }

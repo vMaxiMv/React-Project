@@ -7,9 +7,10 @@ import loginStyles from '../Messanger/Messanger.module.css'
 
 // password = ipdpndnpp47
 function LoginForm(props){
-    const {register, handleSubmit, formState:{errors} } = useForm()
+    const {register, handleSubmit, setError, reset,clearErrors, formState:{errors} } = useForm()
     const onSubmit = (data) => {
-        props.login(data.email, data.password, data.rememberMe)
+        props.login(data.email, data.password, data.rememberMe, setError)
+        reset()
     }
 
     return (
@@ -22,7 +23,7 @@ function LoginForm(props){
                             value:50,
                             message: 'Почта не должна содержать более 50 символов'
                         }}
-                    )} className={errors.email ? loginStyles.inputError : undefined}/>
+                    )} className={errors.email ? loginStyles.inputError : undefined} onFocus={()=>clearErrors()}/>
                 </div>
                 <div>
                     <input placeholder={'Password'} type="password" {...register('password',
@@ -31,7 +32,7 @@ function LoginForm(props){
                                 value:4,
                                 message: 'Пароль не может содержать менее 4 символов'
                             }}
-                    )}  className={errors.password ? loginStyles.inputError : undefined}/>
+                    )}  className={errors.password ? loginStyles.inputError : undefined} onFocus={()=>clearErrors()}/>
                 </div>
                 <div>
                     <input type="checkbox" {...register('rememberMe')}/> remember me
@@ -41,6 +42,7 @@ function LoginForm(props){
                 <div>
                     <button type="submit" disabled={Object.keys(errors).length > 0}>Login</button>
                 </div>
+                {errors.server && <div className={loginStyles.errorMessage}>{errors.server.message}</div>}
             </form>
         </div>
     );
@@ -55,7 +57,7 @@ const mapStateToProps = (state)=>{
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        login: (email, password, rememberMe) => dispatch(loginThunk(email, password, rememberMe)),
+        login: (email, password, rememberMe,setError) => dispatch(loginThunk(email, password, rememberMe, setError)),
     };
 };
 

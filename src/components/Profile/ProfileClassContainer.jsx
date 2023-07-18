@@ -31,7 +31,7 @@ import {compose} from "redux";
 function ProfileContainer(props){
     let {userId} = useParams()
     if(!userId){
-        userId = 2;
+        userId = props.loginnedUserId;
     }
     useEffect(()=>{
         // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
@@ -56,7 +56,8 @@ const mapStateToProps = (state) => {
     return {
         profile: state.ProfilePage.profile,
         isAuth: state.Auth.isAuth,
-        status: state.ProfilePage.status
+        status: state.ProfilePage.status,
+        loginnedUserId: state.Auth.userId
     }
 }
 // const mapDispatchToProps = (dispatch) => {

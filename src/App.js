@@ -13,8 +13,20 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileClassContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
+import {useEffect} from "react";
+import {authMeThunk} from "./redux/AuthReducer";
+import {connect} from "react-redux";
+import { initializeAppThunk} from "./redux/AppReducer";
+import Loading from "./components/common/loading/loading";
 
 function App(props) {
+  useEffect(()=> {
+        props.initializeAppThunk()
+      }
+  )
+  if(!props.initialized){
+    return <Loading/>
+  }
   return (
     <BrowserRouter>
       <div className="app-wrapper">
@@ -37,5 +49,9 @@ function App(props) {
     </BrowserRouter>
   );
 }
-
-export default App;
+const mapStateToProps = (state)=>{
+  return {
+    initialized:state.App.initialized
+  }
+}
+export default connect(mapStateToProps, {initializeAppThunk})(App) ;
